@@ -6,9 +6,13 @@
 #include <unordered_map>
 
 const enum TextureSlots {
-	TEX_SLOT_TARGET,		// For rendering target or temp work (like tex creation)
-	TEX_SLOT_DIFFUSE,		// Diffuse or Skybox texture
-	TEX_SLOT_AMBIENT,		// Ambient Cubemap (mostly for Skybox reflection)
+	TEX_SLOT_TEMP,			// For temp work (like tex creation or post-process pass)
+	TEX_SLOT_DEPTH,			// For fluid post-process pass
+	TEX_SLOT_THICKNESS,		// For fluid post-process pass
+	TEX_SLOT_DIFFUSE,		// Diffuse texture
+	TEX_SLOT_AMBIENT,		// Ambient lighting
+	TEX_SLOT_SKYBOX,		// Skybox cubemap
+	TEX_SLOT_REFLECTIONS	// Reflections cubemaps array
 };
 
 class Shader
@@ -37,8 +41,11 @@ public:
 	void set_uniform_1b(const std::string &name, const bool value);
 	void set_uniform_1i(const std::string &name, const int value);
 	void set_uniform_1f(const std::string &name, const float value);
-	void set_uniform_uvec3(const std::string &name, const glm::uvec3& vector);
+	void set_uniform_1fv(const std::string& name, const int count, const float* first_value);
+	void set_uniform_vec2(const std::string &name, const glm::vec2& vector);
 	void set_uniform_vec3(const std::string &name, const glm::vec3& vector);
+	void set_uniform_vec3v(const std::string &name, const glm::vec3* vectors, const GLsizei count);
+	void set_uniform_uvec3(const std::string &name, const glm::uvec3& vector);
 	void set_uniform_mat3(const std::string &name, const glm::mat3& matrix);
 	void set_uniform_mat4(const std::string &name, const glm::mat4& matrix);
 };

@@ -17,10 +17,10 @@ void main()
 	v_mass = a_mass;
 	
 	gl_PointSize = 3.0;	// Clamped depending on hardware?
-	//gl_PointSize = a_mass + 2.0;	// Clamped depending on hardware?
+	//gl_PointSize = a_mass / 100.0 + 2.0;	// Clamped depending on hardware?
 
 	float x = floor(gl_VertexID / (u_grid_size.y * u_grid_size.z));
-	float y = floor((gl_VertexID / u_grid_size.z) % u_grid_size.y);
-	float z = floor(gl_VertexID % u_grid_size.z);
+	float y = floor((gl_VertexID % (u_grid_size.y * u_grid_size.z)) / u_grid_size.z);
+	float z = floor((gl_VertexID % (u_grid_size.y * u_grid_size.z)) % u_grid_size.z);
 	gl_Position = u_projection_mat * u_view_mat * u_model_mat * vec4(x, y, z, 1.0);
 }

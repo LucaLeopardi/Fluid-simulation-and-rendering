@@ -21,12 +21,11 @@ private:
 
 public:
 
-	// TODO: Model name?
 	// Models own Meshes and Textures. Meshes point to a Texture from their Model, or a standalone one.
 	std::vector<Mesh> meshes;
 	std::vector<Texture> textures;
-
-	Model(const std::string& model_path);				// Model path constructor (Assimp import)
+	
+	Model();
 	
 	Model(std::vector<Mesh>&& meshes);					// Constructor from rvalue vector of Meshes (as they're move-only)
 
@@ -53,4 +52,6 @@ public:
 	const glm::mat4& get_model_mat() const;
 
 	const glm::mat3& get_normal_mat() const;
+
+	void translate(glm::vec3 movement);
 };

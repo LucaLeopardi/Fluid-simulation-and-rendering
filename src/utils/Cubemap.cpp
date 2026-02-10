@@ -2,7 +2,7 @@
 #include <stb_image.h>
 #include <iostream>
 
-const std::string Cubemap::DEFAULT_CUBEMAP_PATHS[6] = {
+const std::string Cubemap::CUBEMAP_PATHS[6] = {
 	"assets/textures/default_texture.png",
 	"assets/textures/default_texture.png",
 	"assets/textures/default_texture.png",
@@ -11,9 +11,9 @@ const std::string Cubemap::DEFAULT_CUBEMAP_PATHS[6] = {
 	"assets/textures/default_texture.png",
 };
 
-Cubemap::Cubemap() : Cubemap(DEFAULT_CUBEMAP_PATHS) { };
+Cubemap::Cubemap() : Cubemap(CUBEMAP_PATHS) { };
 
-Cubemap::Cubemap(const std::string filePaths[6])
+Cubemap::Cubemap(const std::string (&filePaths)[6])
 {
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &_id);
@@ -29,8 +29,8 @@ Cubemap::Cubemap(const std::string filePaths[6])
 			std::cout << "WARNING::Cubemap::ctor: Failed to load texture " << filePaths[i] << " - " << stbi_failure_reason() << std::endl;
 			std::cout << "Loading default texture." << std::endl << std::endl;
 			
-			data = stbi_load(DEFAULT_CUBEMAP_PATHS[i].c_str(), &width, &height, &num_channels, 4);
-			if (!data) std::cout << "ERROR::Cubemap::ctor: Failed to load default texture" << DEFAULT_CUBEMAP_PATHS[i] << " - " << stbi_failure_reason() << std::endl << std::endl;
+			data = stbi_load(CUBEMAP_PATHS[i].c_str(), &width, &height, &num_channels, 4);
+			if (!data) std::cout << "ERROR::Cubemap::ctor: Failed to load default texture" << CUBEMAP_PATHS[i] << " - " << stbi_failure_reason() << std::endl << std::endl;
 		}
 
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);

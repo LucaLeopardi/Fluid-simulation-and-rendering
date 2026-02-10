@@ -7,7 +7,7 @@ class Cubemap
 {
 private:
 
-	static const std::string DEFAULT_CUBEMAP_PATHS[6];
+	static const std::string CUBEMAP_PATHS[6];
 	GLuint _id = 0;
 
 public:
@@ -18,7 +18,7 @@ public:
 
 	Cubemap();
 
-	Cubemap(const std::string file_paths[6]);
+	Cubemap(const std::string (&file_paths)[6]);
 
 	// Copy constructor/assignment are forbidden: we don't want multiple instances pointing to the same OpenGL data, since it can be deleted by them
 	Cubemap(const Cubemap& other) = delete;

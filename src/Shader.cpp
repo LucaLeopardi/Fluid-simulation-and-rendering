@@ -131,14 +131,26 @@ void Shader::set_uniform_1i(const std::string& name, const int value) { glUnifor
 
 void Shader::set_uniform_1f(const std::string& name, const float value) { glUniform1f(get_uniform_location(name.c_str()), value); }
 
-void Shader::set_uniform_uvec3(const std::string& name, const glm::uvec3& vector) 
+void Shader::set_uniform_1fv(const std::string& name, const int count, const float* first_value) { glUniform1fv(get_uniform_location(name.c_str()), count, first_value); }
+
+void Shader::set_uniform_vec2(const std::string& name, const glm::vec2& vector) 
 { 
-	glUniform3uiv(get_uniform_location(name.c_str()), 1, glm::value_ptr(vector)); 
+	glUniform2fv(get_uniform_location(name.c_str()), 1, glm::value_ptr(vector)); 
 }
 
 void Shader::set_uniform_vec3(const std::string& name, const glm::vec3& vector) 
 { 
 	glUniform3fv(get_uniform_location(name.c_str()), 1, glm::value_ptr(vector)); 
+}
+
+void Shader::set_uniform_vec3v(const std::string & name, const glm::vec3* vectors, const GLsizei count)
+{
+	glUniform3fv(get_uniform_location(name.c_str()), count, glm::value_ptr(vectors[0])); 
+}
+
+void Shader::set_uniform_uvec3(const std::string& name, const glm::uvec3& vector) 
+{ 
+	glUniform3uiv(get_uniform_location(name.c_str()), 1, glm::value_ptr(vector)); 
 }
 
 void Shader::set_uniform_mat3(const std::string& name, const glm::mat3& matrix) 

@@ -21,10 +21,9 @@ void Model::_update_normal_mat()
 	_normal_mat = glm::mat3(glm::transpose(glm::inverse(_model_mat)));
 }
 
-Model::Model(const std::string& modelPath)
+Model::Model()
 {
-	// TODO: Check for duplicate Textures in Assimp. Somehow. (Keep cache of Tex data on load, and skip if equal?)
-	// TODO
+	_update_model_mat();
 }
 
 Model::Model(std::vector<Mesh>&& meshes) :
@@ -62,4 +61,10 @@ void Model::set_rotation(const glm::vec3 newRotation)
 
 const glm::mat4& Model::get_model_mat() const { return _model_mat; }
 
-const glm::mat3 & Model::get_normal_mat() const { return _normal_mat; } 
+const glm::mat3 & Model::get_normal_mat() const { return _normal_mat; }
+
+void Model::translate(glm::vec3 movement)
+{
+	_transform.position += movement;
+	_update_model_mat();
+} 

@@ -18,8 +18,7 @@ public:
 
 	/// @brief !!! CAN BE NULL !!! Pointer to Texture used by Mesh, either from a Model or standalone. If null, Renderer uses default Texture.
 	Texture* diffuse_tex = nullptr; 
-	// ^ Currently only used in Renderer, which checks for null values. // TODO: Make shared pointer?
-	// TODO: Material?
+	// ^ Currently only used in Renderer, which checks for null values.
 
 	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);	// Default constructor
 

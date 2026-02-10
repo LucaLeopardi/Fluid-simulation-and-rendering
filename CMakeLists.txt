@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 4.0.3)
 project(GPUCRTGP LANGUAGES 
 	C 
 	CXX 
-#	CUDA
+	CUDA
 )
 
-#find_package(CUDAToolkit REQUIRED)
+find_package(CUDAToolkit REQUIRED)
 find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
@@ -24,7 +24,8 @@ set(SOURCES
 	src/Model.cpp
 	src/UIRenderer.cpp
 	src/Renderer.cpp
-	src/MPM/MPMSimulation.cpp
+	src/MPM/MPMSimulation.cu
+	src/utils/deviceQuery.cu
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -35,29 +36,30 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-#	CUDA::cudart
+	CUDA::cudart
 	glad::glad 
 	glfw 
 	glm::glm 
 	imgui::imgui
 )
 
-# Only for architectures of current machine - great for sharing source code, might need to specify arch to share built app.
-# Only supported in CMake 3.24+
-#set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES native)
-
 # Enable OpenGL Debugging Context in Debug build
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Debug>:ENABLE_GL_DEBUG_CONTEXT>
+    $<$<CONFIG:Debug>:ENABLE_ASSERTS>
 )
 
+# Only for architectures of current machine - great for sharing source code, might need to specify arch to share built app.
+# Only supported in CMake 3.24+
+set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES native)
+
 add_compile_options(    
-	# C++ compiler optimization in Release
+	# C++ optimization in Release build
     $<$<CONFIG:Release>:$<$<COMPILE_LANGUAGE:CXX>:-O3 -march=native>>
-	# CUDA compiler optimization in Release
-#  	$<$<CONFIG:Release>:$<$<COMPILE_LANGUAGE:CUDA>:-Xcompiler=-O3;-Xcompiler=-march=native>>
+	# CUDA optimization in Release build
+  	$<$<CONFIG:Release>:$<$<COMPILE_LANGUAGE:CUDA>:-Xcompiler=-O3;-Xcompiler=-march=native>>
 	# Suppress warning
-#	$<$<COMPILE_LANGUAGE:CUDA>:-Wno-deprecated-gpu-targets >
+	$<$<COMPILE_LANGUAGE:CUDA>:-Wno-deprecated-gpu-targets >
 )
 
 # Copy shader files to the build directory

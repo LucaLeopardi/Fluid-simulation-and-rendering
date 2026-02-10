@@ -7,7 +7,7 @@ class Texture
 {
 private:
 
-	static const std::string DEFAULT_TEXTURE_PATH;
+	static const std::string TEXTURE_PATH;
 	GLuint _id = 0;
 
 public:

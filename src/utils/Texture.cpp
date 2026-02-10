@@ -2,9 +2,9 @@
 #include <stb_image.h>
 #include <iostream>
 
-const std::string Texture::DEFAULT_TEXTURE_PATH = "assets/textures/default_texture.png";
+const std::string Texture::TEXTURE_PATH = "assets/textures/default_texture.png";
 
-Texture::Texture() : Texture(DEFAULT_TEXTURE_PATH) { };
+Texture::Texture() : Texture(TEXTURE_PATH) { };
 
 Texture::Texture(const std::string& filePath)
 {
@@ -15,7 +15,7 @@ Texture::Texture(const std::string& filePath)
 		std::cout << "WARNING::Texture::ctor: Failed to load texture " << filePath << " - " << stbi_failure_reason() << std::endl;
 		std::cout << "Loading default texture." << std::endl << std::endl;
 		
-		data = stbi_load(DEFAULT_TEXTURE_PATH.c_str(), &width, &height, &num_channels, 4);
+		data = stbi_load(TEXTURE_PATH.c_str(), &width, &height, &num_channels, 4);
 		if (!data) std::cout << "ERROR::Texture::ctor: Failed to load default texture - " << stbi_failure_reason() << std::endl << std::endl;
 	}
 

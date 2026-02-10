@@ -6,15 +6,16 @@
 			"displayName": "Visual Studio Build Tools 2022 - amd64",
 			"description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
 			"generator": "Visual Studio 17 2022",
-			"toolset": "host=x64",
+			"toolset": "host=x64,cuda=C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9",
 			"architecture": "x64",
-			"binaryDir": "${sourceDir}/out/build/${presetName}",
 			"cacheVariables": {
-				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
 				"CMAKE_C_COMPILER": "cl.exe",
 				"CMAKE_CXX_COMPILER": "cl.exe",
-				"CMAKE_TOOLCHAIN_FILE": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
-			}
+				"CMAKE_CUDA_COMPILER": "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/bin/nvcc.exe"
+			},
+			"toolchainFile": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"installDir": "${sourceDir}/out/install/${presetName}",
+			"binaryDir": "${sourceDir}/out/build/${presetName}"
 		}
 	],
 	"buildPresets": [
