@@ -1,0 +1,18 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+        {
+            "type": "cppvsdbg",
+            "request": "launch",
+            "name": "Debug GPUCRTGP",
+            "program": "${workspaceFolder}/out/build/VS_2022_x64/Debug/GPUCRTGP.exe",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build",
+			"console": "internalConsole",
+			"internalConsoleOptions": "openOnSessionStart",
+			"logging": {
+				"moduleLoad": false
+			}
+        }
+    ]
+}

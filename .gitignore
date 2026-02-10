@@ -1,0 +1,20 @@
+# Editor settings folder, but include Debug build and launch task
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+
+# ImGui
+imgui.ini
+
+# Build folder
+out/
+
+# External libraries folder
+vcpkg_installed/
+
+# Above should cover all for my setup, but here's some file types to be safe
+# Executables/libs
+*.exe *.dll *.so *.dylib *.obj *.o
+# CUDA intermediates
+*.ptx *.cubin *.s

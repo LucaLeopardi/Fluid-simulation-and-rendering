@@ -1,0 +1,17 @@
+{
+	"name": "gpucrtgp",
+	"version": "0.1",
+	"dependencies": [
+		"glad",
+		"glfw3",
+		"glm",
+		{
+			"name": "imgui", 
+			"features": [
+				"opengl3-binding",
+				"glfw-binding"
+			]
+		},
+		"stb"
+	]
+}
